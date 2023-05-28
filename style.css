@@ -1,39 +1,138 @@
-#game div {
-  border: 1px solid black;
-  width: 15%;
-  height: 200px;
-  margin: 10px;
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f2f2f2;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
   display: inline-block;
+  animation: colorAnimation 3s infinite;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* .memory-card{
+hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 10px 0;
+}
+
+#game {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#game div {
+  width: 150px;
+  height: 150px;
+  margin: 10px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.front-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background-color: #f1f1f1;
+}
+
+.back-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background-color: #2f2f2f;
+  transform: rotateY(180deg);
+}
+
+.memory-card {
   position: relative;
-  transform: scale(1);
   width: 15%;
   height: 200px;
   margin: 10px;
+  border: 2px solid black;
+  perspective: 1000px;
+  cursor: pointer;
 }
 
-/* .memory-card : active{
-  transform: scale(.97);
-  transition: transform .2s;
-} */
-
-.memory-card.flip{
-  transform:rotateY(180deg)
+.memory-card.flip {
+  transform: rotateY(180deg);
 }
 
-.color-hidden{
+.color-hidden {
   backface-visibility: hidden;
 }
 
-.front-face{ 
-  /* width: 100%;
-  height: 100%;
-  padding: 10px; */
-  /* backface-visibility: hidden; */
+#game div.flip {
+  background-color: #fff;
 }
 
-.front-face{
-  transform:rotateY(180deg)
-} */
+#game div.matched {
+  background-color: #6dcf8b;
+  cursor: default;
+}
+
+#current-score,
+#best-score {
+  font-weight: bold;
+  color: #333;
+}
+
+#restart-container {
+  margin-top: 20px;
+}
+
+#reset-form {
+  display: inline-block;
+}
+
+#restart-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#restart-btn:hover {
+  background-color: #555;
+}
+
+@keyframes colorAnimation {
+  0% {
+    color: #ff0000;
+  }
+  16% {
+    color: #ff7f00;
+  }
+  33% {
+    color: #ffff00;
+  }
+  50% {
+    color: #00ff00;
+  }
+  66% {
+    color: #0000ff;
+  }
+  83% {
+    color: #8b00ff;
+  }
+  100% {
+    color: #ff0000;
+  }
+}

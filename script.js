@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 const gameContainer = document.getElementById("game");
 let card1 = null;
@@ -10,11 +10,10 @@ let currentScore = Number(0);
 // let cardFrontColor = "darkgray";
 
 // Gets best score from localStorage or sets it to zero
-let bestScore = JSON.parse(localStorage.getItem('bestScore')) || Number(0);
+let bestScore = JSON.parse(localStorage.getItem("bestScore")) || Number(0);
 
-const currentScoreContainer = document.querySelector('#current-score');
+const currentScoreContainer = document.querySelector("#current-score");
 currentScoreContainer.innerText = currentScore;
-
 
 const COLORS = [
   "red",
@@ -26,12 +25,9 @@ const COLORS = [
   "blue",
   "green",
   "orange",
-  "purple"
+  "purple",
 ];
 
-// here is a helper function to shuffle an array
-// it returns the same array with values shuffled
-// it is based on an algorithm called Fisher Yates if you want ot research more
 function shuffle(array) {
   let counter = array.length;
 
@@ -54,55 +50,16 @@ function shuffle(array) {
 
 let shuffledColors = shuffle(COLORS);
 
-// this function loops over the array of colors
-// it creates a new div and gives it a class with the value of the color
-// it also adds an event listener for a click for each card
 function createDivsForColors(colorArray) {
-
   for (let color of colorArray) {
     const newDiv = document.createElement("div");
     newDiv.classList.add(color);
     newDiv.addEventListener("click", handleCardClick);
     gameContainer.append(newDiv);
   }
-
-    // <-------------MY CODE------------>
-    // for (let color of colorArray) {
-
-      // const newDiv = document.createElement('div');
-      // newDiv.classList.add('memory-card');
-
-      // const newFrontFace = document.createElement('div');
-      //   newFrontFace.classList.add('front-face');
-      //   newFrontFace.style.backgroundColor = color;
-
-      // const newBackFace = document.createElement('div');
-      //   newBackFace.classList.add('back-face');
-      //   newBackFace.style.backgroundColor = 'darkgray';
-
-     
-
-
-    // append the div to the element with an id of game
-
-    // <-------------ALSO MY CODE-------------->
-
-     // call a function handleCardClick when a div is clicked on
-
-      // newDiv.addEventListener("click", handleCardClick);
-
-//     newDiv.append(newFrontFace);
-//     newDiv.append(newBackFace);
-//     gameContainer.append(newDiv);
-//   }
-// }
 }
 
-// TODO: Implement this function!
 function handleCardClick(event) {
-  // you can use event.target to see which element was clicked
-
-  //<-------------SOLUTION CODE--------------->
   if (noClicking) return;
 
   let currentCard = event.target;
@@ -128,7 +85,7 @@ function handleCardClick(event) {
       card2 = null;
       noClicking = false;
     } else {
-      setTimeout(function() {
+      setTimeout(function () {
         card1.style.backgroundColor = "";
         card2.style.backgroundColor = "";
         card1.classList.remove("flip");
@@ -142,25 +99,36 @@ function handleCardClick(event) {
 
   if (cardsFlipped === COLORS.length) alert("game over!");
 }
+// Animate heading colors
+function animateHeading() {
+  const h1 = document.querySelector("h1");
+  const text = h1.innerText;
+  const colors = [
+    "#FF0000",
+    "#FF7F00",
+    "#FFFF00",
+    "#00FF00",
+    "#0000FF",
+    "#8B00FF",
+  ];
 
-// <-------------MY CODE--------------->
-//   this.classList.toggle('flip');
-//   let newFrontface = document.querySelector(".memory-card .flip");
-//   let newFrontFace = document.querySelector(".memory-card .flip");
+  let animatedText = "";
+  for (let i = 0; i < text.length; i++) {
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    animatedText += `<span style="color: ${randomColor}">${text[i]}</span>`;
+  }
 
+  h1.innerHTML = animatedText;
+}
 
-//   // cards.forEach(card => addEventListener('click', flipCard))
-  
-// }
+animateHeading();
+setInterval(animateHeading, 3000); // Change colors every 3 seconds
 
-
-// <-----------RESET BUTTON-------------->
-const restartBtn = document.querySelector('#restart-btn');
-restartBtn.addEventListener('click',function(event){
+// RESET BUTTON
+const restartBtn = document.querySelector("#restart-btn");
+restartBtn.addEventListener("click", function (event) {
   window.location.reload();
 });
-
-
 
 // when the DOM loads
 createDivsForColors(shuffledColors);
