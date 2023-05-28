@@ -1,7 +1,8 @@
 body {
   font-family: Arial, sans-serif;
   text-align: center;
-  background-color: #f2f2f2;
+  background: linear-gradient(to bottom, #ff8a80, #f50057);
+  animation: gradientTransition 10s ease infinite alternate;
   margin: 0;
   padding: 20px;
 }
@@ -134,5 +135,14 @@ hr {
   }
   100% {
     color: #ff0000;
+  }
+}
+
+@keyframes gradientTransition {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
   }
 }
